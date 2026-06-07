@@ -26,13 +26,18 @@ function resizeCanvas() {
   drawFrame(frameForScroll());
 }
 
+// Vertical focal point for cover-crop: 0 = top, 0.5 = center, 1 = bottom.
+// The video is portrait and the subject's face sits in the upper area, so we
+// bias toward the top to keep her face visible on wide/landscape viewports.
+const FOCAL_Y = 0.22;
+
 function drawImageCover(img) {
   if (!img || !img.complete) return;
   const cw = canvas.width, ch = canvas.height;
   const iw = img.naturalWidth, ih = img.naturalHeight;
   const scale = Math.max(cw / iw, ch / ih);
   const w = iw * scale, h = ih * scale;
-  const x = (cw - w) / 2, y = (ch - h) / 2;
+  const x = (cw - w) / 2, y = (ch - h) * FOCAL_Y;
   ctx.drawImage(img, x, y, w, h);
 }
 
