@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EVE</title>
+  <meta name="description" content="EVE" data-i18n="meta_desc" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Heebo:wght@300;400;500;700&family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Loading screen -->
+  <div id="loader" class="loader">
+    <div class="loader-inner">
+      <div class="loader-mark">EVE</div>
+      <div class="loader-bar"><div id="loaderFill" class="loader-fill"></div></div>
+      <div id="loaderPct" class="loader-pct">0%</div>
+    </div>
+  </div>
+
+  <!-- Fixed nav -->
+  <header class="nav">
+    <div class="nav-brand">EVE</div>
+    <nav class="nav-links">
+      <a href="#services" data-i18n="nav_services">שירותים</a>
+      <a href="#about" data-i18n="nav_about">אודות</a>
+      <a href="#contact" data-i18n="nav_contact">צרו קשר</a>
+    </nav>
+    <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
+      <button data-lang="he" class="active">HE</button>
+      <button data-lang="ru">RU</button>
+      <button data-lang="fr">FR</button>
+    </div>
+  </header>
+
+  <!-- Scroll-driven video hero -->
+  <section id="scrollVideo" class="scroll-video">
+    <div class="sticky-stage">
+      <canvas id="frameCanvas"></canvas>
+      <div class="hero-overlay">
+        <h1 class="hero-title">EVE</h1>
+        <p class="hero-sub" data-i18n="hero_sub">גללו כדי לחוות</p>
+      </div>
+      <div class="scroll-hint"><span></span></div>
+    </div>
+  </section>
+
+  <!-- Content below -->
+  <main class="content">
+    <section id="services" class="panel services-panel">
+      <p class="eyebrow" data-i18n="services_eyebrow">01 — השירותים שלנו</p>
+      <h2 data-i18n="services_title">טיפוח מדויק, מכף רגל ועד הגבה.</h2>
+      <div class="services-grid">
+        <article class="service-card">
+          <span class="service-num">01</span>
+          <h3 data-i18n="svc_wax">שעווה</h3>
+          <p data-i18n="svc_wax_d">הסרת שיער עדינה ויסודית לעור חלק לאורך זמן.</p>
+        </article>
+        <article class="service-card">
+          <span class="service-num">02</span>
+          <h3 data-i18n="svc_nails">בנייה / ג׳ל / מניקור / פדיקור</h3>
+          <p data-i18n="svc_nails_d">ציפורניים מושלמות — בנייה, ג׳ל וטיפוח ידיים ורגליים.</p>
+        </article>
+        <article class="service-card">
+          <span class="service-num">03</span>
+          <h3 data-i18n="svc_brows">עיצוב גבות</h3>
+          <p data-i18n="svc_brows_d">עיצוב מותאם אישית שמדגיש את קווי הפנים.</p>
+        </article>
+        <article class="service-card">
+          <span class="service-num">04</span>
+          <h3 data-i18n="svc_lash">הרמת ריסים</h3>
+          <p data-i18n="svc_lash_d">ריסים מורמים ומלאים למבט פתוח וטבעי.</p>
+        </article>
+        <article class="service-card">
+          <span class="service-num">05</span>
+          <h3 data-i18n="svc_micro">מיקרובליידינג</h3>
+          <p data-i18n="svc_micro_d">מילוי גבות בטכניקת שׂיער-שׂיער לתוצאה טבעית.</p>
+        </article>
+        <article class="service-card">
+          <span class="service-num">06</span>
+          <h3 data-i18n="svc_laser">הסרת שיער בלייזר קר</h3>
+          <p data-i18n="svc_laser_d">הסרת שיער יעילה ונעימה בטכנולוגיית לייזר קר.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="panel alt">
+      <p class="eyebrow" data-i18n="about_eyebrow">02 — אודות</p>
+      <h2 data-i18n="about_title">נוכחות שקטה. נראות חדה.</h2>
+      <p class="lede" data-i18n="about_lede">EVE הוא מרחב טיפוח אישי שבו כל טיפול נעשה בקפידה, בנקיון ובתשומת לב לפרטים — כדי שתצאו מרגישות את הגרסה הטובה ביותר של עצמכן.</p>
+    </section>
+
+    <section id="contact" class="panel">
+      <p class="eyebrow" data-i18n="contact_eyebrow">03 — צרו קשר</p>
+      <h2 data-i18n="contact_title">לתאם תור?</h2>
+      <p class="lede" data-i18n="contact_lede">נשמח לארח אתכן. שלחו הודעה ונחזור אליכן בהקדם.</p>
+      <a class="cta" id="waCta" href="https://wa.me/972522735915?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%AA%D7%90%D7%9D%20%D7%AA%D7%95%D7%A8%20%D7%91-EVE" target="_blank" rel="noopener" data-i18n="contact_cta">קביעת תור</a>
+    </section>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> EVE</span>
+      <span data-i18n="footer_note">מכון יופי וטיפוח</span>
+    </footer>
+  </main>
+
+  <script src="i18n.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+:root {
+  --bg: #0a0a0a;
+  --fg: #f4f1ec;
+  --muted: #9b958c;
+  --accent: #c9a86a;
+  --panel: #111110;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Heebo", "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ---------- Loader ---------- */
+.loader {
+  position: fixed; inset: 0; z-index: 1000;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity .8s ease, visibility .8s ease;
+}
+.loader.hidden { opacity: 0; visibility: hidden; }
+.loader-inner { text-align: center; width: min(320px, 70vw); }
+.loader-mark {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(48px, 9vw, 92px);
+  letter-spacing: .25em;
+  font-weight: 500;
+  padding-right: .25em;
+}
+.loader-bar {
+  margin: 28px 0 14px; height: 1px; width: 100%;
+  background: rgba(244,241,236,.15); overflow: hidden;
+}
+.loader-fill { height: 100%; width: 0%; background: var(--accent); transition: width .2s ease; }
+.loader-pct { font-size: 12px; letter-spacing: .3em; color: var(--muted); }
+
+/* ---------- Nav ---------- */
+.nav {
+  position: fixed; top: 0; inset-inline: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px clamp(20px, 5vw, 64px);
+  mix-blend-mode: difference; color: #fff;
+}
+.nav-brand {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 26px; letter-spacing: .35em; font-weight: 600; padding-right: .35em;
+}
+.nav-links { display: flex; gap: clamp(16px, 3vw, 38px); }
+.nav-links a {
+  color: inherit; text-decoration: none; font-size: 13px;
+  letter-spacing: .12em; opacity: .85; transition: opacity .3s;
+}
+.nav-links a:hover { opacity: 1; }
+
+.lang-switch { display: flex; gap: 4px; }
+.lang-switch button {
+  background: transparent; border: 0; cursor: pointer; color: inherit;
+  font-family: "Inter", sans-serif; font-size: 12px; letter-spacing: .12em;
+  padding: 6px 8px; opacity: .55; transition: opacity .3s; line-height: 1;
+}
+.lang-switch button:hover { opacity: .9; }
+.lang-switch button.active { opacity: 1; border-bottom: 1px solid currentColor; }
+
+/* ---------- Scroll video ---------- */
+.scroll-video { position: relative; height: 600vh; }
+.sticky-stage {
+  position: sticky; top: 0; height: 100vh; width: 100%;
+  overflow: hidden; background: #000;
+}
+#frameCanvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 5;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,.35) 100%);
+}
+.hero-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(64px, 16vw, 220px);
+  font-weight: 500; letter-spacing: .12em; line-height: 1;
+  color: #fff; text-shadow: 0 4px 40px rgba(0,0,0,.5);
+  padding-right: .12em;
+}
+.hero-sub {
+  margin-top: 18px; font-size: clamp(13px, 1.6vw, 16px);
+  letter-spacing: .35em; color: rgba(255,255,255,.85);
+}
+.scroll-hint {
+  position: absolute; bottom: 34px; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 48px; background: rgba(255,255,255,.3); overflow: hidden; z-index: 6;
+}
+.scroll-hint span {
+  display: block; width: 100%; height: 40%; background: #fff;
+  animation: drop 1.8s cubic-bezier(.7,0,.3,1) infinite;
+}
+@keyframes drop {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(250%); }
+}
+
+/* ---------- Content ---------- */
+.content { position: relative; z-index: 10; background: var(--bg); }
+.panel {
+  min-height: 90vh; display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(60px, 12vh, 160px) clamp(22px, 8vw, 140px);
+  border-top: 1px solid rgba(244,241,236,.06);
+}
+.panel.alt { background: var(--panel); }
+.eyebrow { font-size: 12px; letter-spacing: .35em; color: var(--accent); margin-bottom: 22px; }
+.panel h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(36px, 6.5vw, 88px); font-weight: 500; line-height: 1.05;
+  margin-bottom: 26px;
+}
+.lede { max-width: 56ch; font-size: clamp(16px, 2vw, 21px); color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+/* ---------- Services grid ---------- */
+.services-panel { min-height: 100vh; }
+.services-grid {
+  margin-top: clamp(36px, 6vh, 72px);
+  display: grid; gap: 1px;
+  grid-template-columns: repeat(3, 1fr);
+  background: rgba(244,241,236,.08);
+  border: 1px solid rgba(244,241,236,.08);
+}
+.service-card {
+  background: var(--bg); padding: clamp(28px, 4vw, 48px);
+  display: flex; flex-direction: column; gap: 12px;
+  transition: background .4s ease, transform .4s ease;
+  position: relative;
+}
+.service-card:hover { background: var(--panel); }
+.service-num {
+  font-family: "Cormorant Garamond", serif; font-size: 14px;
+  color: var(--accent); letter-spacing: .2em;
+}
+.service-card h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(22px, 2.4vw, 30px); font-weight: 500; line-height: 1.15;
+}
+.service-card p { color: var(--muted); font-size: 15px; line-height: 1.6; font-weight: 300; }
+
+@media (max-width: 900px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .services-grid { grid-template-columns: 1fr; } }
+.cta {
+  align-self: flex-start; margin-top: 12px;
+  display: inline-block; padding: 16px 42px;
+  border: 1px solid var(--accent); color: var(--accent);
+  text-decoration: none; letter-spacing: .2em; font-size: 14px;
+  transition: background .35s, color .35s;
+}
+.cta:hover { background: var(--accent); color: #0a0a0a; }
+
+.footer {
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  padding: 40px clamp(22px, 8vw, 140px);
+  font-size: 12px; letter-spacing: .15em; color: var(--muted);
+  border-top: 1px solid rgba(244,241,236,.06);
+}
+
+/* reveal */
+.panel h2, .panel .lede, .panel .eyebrow, .panel .cta, .panel .services-grid {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .9s ease, transform .9s ease;
+}
+.panel.in-view h2 { opacity: 1; transform: none; transition-delay: .05s; }
+.panel.in-view .eyebrow { opacity: 1; transform: none; }
+.panel.in-view .lede { opacity: 1; transform: none; transition-delay: .15s; }
+.panel.in-view .cta { opacity: 1; transform: none; transition-delay: .2s; }
+.panel.in-view .services-grid { opacity: 1; transform: none; transition-delay: .2s; }
+
+@media (max-width: 640px) {
+  .nav-links { gap: 16px; }
+  .nav-links a { font-size: 11px; }
+}
