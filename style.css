@@ -89,9 +89,14 @@ body {
   color: #fff; text-shadow: 0 4px 40px rgba(0,0,0,.5);
   padding-right: .12em;
 }
+.hero-name {
+  margin-top: 14px; font-size: clamp(14px, 2vw, 22px);
+  letter-spacing: .3em; color: rgba(255,255,255,.92);
+  font-weight: 400;
+}
 .hero-sub {
-  margin-top: 18px; font-size: clamp(13px, 1.6vw, 16px);
-  letter-spacing: .35em; color: rgba(255,255,255,.85);
+  margin-top: 16px; font-size: clamp(12px, 1.4vw, 15px);
+  letter-spacing: .35em; color: rgba(255,255,255,.7);
 }
 .scroll-hint {
   position: absolute; bottom: 34px; left: 50%; transform: translateX(-50%);
@@ -150,6 +155,15 @@ body {
 
 @media (max-width: 900px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .services-grid { grid-template-columns: 1fr; } }
+.contact-details {
+  display: flex; flex-wrap: wrap; gap: clamp(28px, 5vw, 64px);
+  margin: 36px 0 40px;
+}
+.detail { display: flex; flex-direction: column; gap: 8px; }
+.detail-label { font-size: 12px; letter-spacing: .25em; color: var(--accent); text-transform: uppercase; }
+.detail-value { font-size: clamp(16px, 1.8vw, 19px); color: var(--fg); font-weight: 300; text-decoration: none; }
+a.detail-value:hover { color: var(--accent); }
+
 .cta {
   align-self: flex-start; margin-top: 12px;
   display: inline-block; padding: 16px 42px;
@@ -167,14 +181,15 @@ body {
 }
 
 /* reveal */
-.panel h2, .panel .lede, .panel .eyebrow, .panel .cta, .panel .services-grid {
+.panel h2, .panel .lede, .panel .eyebrow, .panel .cta, .panel .services-grid, .panel .contact-details {
   opacity: 0; transform: translateY(28px);
   transition: opacity .9s ease, transform .9s ease;
 }
 .panel.in-view h2 { opacity: 1; transform: none; transition-delay: .05s; }
 .panel.in-view .eyebrow { opacity: 1; transform: none; }
 .panel.in-view .lede { opacity: 1; transform: none; transition-delay: .15s; }
-.panel.in-view .cta { opacity: 1; transform: none; transition-delay: .2s; }
+.panel.in-view .contact-details { opacity: 1; transform: none; transition-delay: .2s; }
+.panel.in-view .cta { opacity: 1; transform: none; transition-delay: .28s; }
 .panel.in-view .services-grid { opacity: 1; transform: none; transition-delay: .2s; }
 
 @media (max-width: 640px) {
