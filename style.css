@@ -69,12 +69,18 @@ body {
 .lang-switch button.active { opacity: 1; border-bottom: 1px solid currentColor; }
 
 /* ---------- Scroll video ---------- */
-.scroll-video { position: relative; height: 420vh; }
+/* Canvas is a FIXED background for the whole page. The video scrubs while you
+   scroll through .scroll-video; afterwards the last frame (the woman) stays as
+   the background and the content panels appear over her one by one. */
+#frameCanvas {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  display: block; z-index: 0; background: #000;
+}
+.scroll-video { position: relative; height: 420vh; z-index: 1; }
 .sticky-stage {
   position: sticky; top: 0; height: 100vh; width: 100%;
-  overflow: hidden; background: #000;
+  overflow: hidden; background: transparent; pointer-events: none;
 }
-#frameCanvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
 .hero-overlay {
   position: absolute; inset: 0; z-index: 5;
@@ -111,14 +117,17 @@ body {
   100% { transform: translateY(250%); }
 }
 
-/* ---------- Content ---------- */
-.content { position: relative; z-index: 10; background: var(--bg); }
+/* ---------- Content (over the fixed woman background) ---------- */
+.content { position: relative; z-index: 10; background: transparent; }
 .panel {
   min-height: 90vh; display: flex; flex-direction: column; justify-content: center;
   padding: clamp(60px, 12vh, 160px) clamp(22px, 8vw, 140px);
-  border-top: 1px solid rgba(244,241,236,.06);
+  border-top: 1px solid rgba(244,241,236,.08);
+  background: rgba(8,8,9,.58);
+  backdrop-filter: blur(6px) saturate(.95);
+  -webkit-backdrop-filter: blur(6px) saturate(.95);
 }
-.panel.alt { background: var(--panel); }
+.panel.alt { background: rgba(8,8,9,.7); }
 .eyebrow { font-size: 12px; letter-spacing: .35em; color: var(--accent); margin-bottom: 22px; }
 .panel h2 {
   font-family: "Cormorant Garamond", serif;
@@ -137,12 +146,12 @@ body {
   border: 1px solid rgba(244,241,236,.08);
 }
 .service-card {
-  background: var(--bg); padding: clamp(28px, 4vw, 48px);
+  background: rgba(10,10,11,.55); padding: clamp(28px, 4vw, 48px);
   display: flex; flex-direction: column; gap: 12px;
   transition: background .4s ease, transform .4s ease;
   position: relative;
 }
-.service-card:hover { background: var(--panel); }
+.service-card:hover { background: rgba(10,10,11,.8); }
 .service-num {
   font-family: "Cormorant Garamond", serif; font-size: 14px;
   color: var(--accent); letter-spacing: .2em;
@@ -177,7 +186,9 @@ a.detail-value:hover { color: var(--accent); }
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
   padding: 40px clamp(22px, 8vw, 140px);
   font-size: 12px; letter-spacing: .15em; color: var(--muted);
-  border-top: 1px solid rgba(244,241,236,.06);
+  border-top: 1px solid rgba(244,241,236,.08);
+  background: rgba(6,6,7,.82);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
 }
 
 /* reveal — elements appear one by one as you scroll */
