@@ -69,7 +69,7 @@ body {
 .lang-switch button.active { opacity: 1; border-bottom: 1px solid currentColor; }
 
 /* ---------- Scroll video ---------- */
-.scroll-video { position: relative; height: 600vh; }
+.scroll-video { position: relative; height: 420vh; }
 .sticky-stage {
   position: sticky; top: 0; height: 100vh; width: 100%;
   overflow: hidden; background: #000;
@@ -180,17 +180,22 @@ a.detail-value:hover { color: var(--accent); }
   border-top: 1px solid rgba(244,241,236,.06);
 }
 
-/* reveal */
-.panel h2, .panel .lede, .panel .eyebrow, .panel .cta, .panel .services-grid, .panel .contact-details {
-  opacity: 0; transform: translateY(28px);
-  transition: opacity .9s ease, transform .9s ease;
+/* reveal — elements appear one by one as you scroll */
+.panel h2, .panel .lede, .panel .eyebrow, .panel .cta, .panel .contact-details, .service-card {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity .8s ease, transform .8s ease;
 }
-.panel.in-view h2 { opacity: 1; transform: none; transition-delay: .05s; }
 .panel.in-view .eyebrow { opacity: 1; transform: none; }
-.panel.in-view .lede { opacity: 1; transform: none; transition-delay: .15s; }
-.panel.in-view .contact-details { opacity: 1; transform: none; transition-delay: .2s; }
-.panel.in-view .cta { opacity: 1; transform: none; transition-delay: .28s; }
-.panel.in-view .services-grid { opacity: 1; transform: none; transition-delay: .2s; }
+.panel.in-view h2 { opacity: 1; transform: none; transition-delay: .1s; }
+.panel.in-view .lede { opacity: 1; transform: none; transition-delay: .2s; }
+.panel.in-view .contact-details { opacity: 1; transform: none; transition-delay: .3s; }
+.panel.in-view .cta { opacity: 1; transform: none; transition-delay: .4s; }
+
+/* staggered service cards — each appears as it scrolls into view */
+.service-card.in-view { opacity: 1; transform: none; }
+.service-card.in-view:nth-child(3n+1) { transition-delay: 0s; }
+.service-card.in-view:nth-child(3n+2) { transition-delay: .12s; }
+.service-card.in-view:nth-child(3n+3) { transition-delay: .24s; }
 
 @media (max-width: 640px) {
   .nav-links { gap: 16px; }

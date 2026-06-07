@@ -111,8 +111,10 @@ function onAllLoaded() {
 function setupReveal() {
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("in-view"); });
-  }, { threshold: 0, rootMargin: "0px 0px -8% 0px" });
+  }, { threshold: 0, rootMargin: "0px 0px -10% 0px" });
   document.querySelectorAll(".panel").forEach((p) => io.observe(p));
+  // observe each service card individually so they appear one by one while scrolling
+  document.querySelectorAll(".service-card").forEach((c) => io.observe(c));
 }
 
 /* ---------- i18n ---------- */
