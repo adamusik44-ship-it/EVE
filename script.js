@@ -68,6 +68,7 @@ function onScroll() {
     requestAnimationFrame(() => {
       drawFrame(frameForScroll());
       fadeHero();
+      updateReveal();
       ticking = false;
     });
   }
@@ -107,14 +108,65 @@ function onAllLoaded() {
   drawFrame(frameForScroll());
 }
 
-/* ---------- Reveal panels ---------- */
+/* ---------- Sequential slide reveal ---------- */
+const SEG = 0.85; // screens of scroll per slide
+let revealSection, slides = [], dots = [], slideCount = 0, activeSlide = -1;
+
 function setupReveal() {
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("in-view"); });
-  }, { threshold: 0, rootMargin: "0px 0px -10% 0px" });
-  document.querySelectorAll(".panel").forEach((p) => io.observe(p));
-  // observe each service card individually so they appear one by one while scrolling
-  document.querySelectorAll(".service-card").forEach((c) => io.observe(c));
+  revealSection = document.getElementById("reveal");
+  if (!revealSection) return;
+  slides = [...revealSection.querySelectorAll(".slide")];
+  slideCount = slides.length;
+  // total scroll height = (N * SEG + 1) screens, so each slide gets ~SEG of a screen
+  revealSection.style.height = (slideCount * SEG + 1) * 100 + "vh";
+
+  // build progress dots
+  const dotsWrap = document.getElementById("revealDots");
+  if (dotsWrap) {
+    slides.forEach((_, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.addEventListener("click", () => scrollToSlide(i));
+      dotsWrap.appendChild(b);
+      dots.push(b);
+    });
+  }
+  updateReveal();
+}
+
+function updateReveal() {
+  if (!revealSection || slideCount === 0) return;
+  const rect = revealSection.getBoundingClientRect();
+  const total = revealSection.offsetHeight - window.innerHeight;
+  const scrolled = Math.min(Math.max(-rect.top, 0), total);
+  const progress = total > 0 ? scrolled / total : 0;
+  let idx = Math.floor(progress * slideCount);
+  if (idx >= slideCount) idx = slideCount - 1;
+  if (idx < 0) idx = 0;
+  if (idx !== activeSlide) {
+    slides.forEach((s, i) => s.classList.toggle("active", i === idx));
+    dots.forEach((d, i) => d.classList.toggle("on", i === idx));
+    activeSlide = idx;
+  }
+}
+
+function scrollToSlide(i) {
+  if (!revealSection) return;
+  const total = revealSection.offsetHeight - window.innerHeight;
+  const sectionTop = revealSection.getBoundingClientRect().top + window.scrollY;
+  const top = sectionTop + ((i + 0.5) / slideCount) * total;
+  window.scrollTo({ top, behavior: "smooth" });
+}
+
+function setupNav() {
+  const map = { services: 0, about: 0, contact: 0 };
+  slides.forEach((s, i) => { const k = s.dataset.slide; if (k) map[k] = i; });
+  document.querySelectorAll(".nav-links a[data-target]").forEach((a) => {
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      scrollToSlide(map[a.dataset.target] || 0);
+    });
+  });
 }
 
 /* ---------- i18n ---------- */
@@ -149,9 +201,15 @@ function setupLang() {
 
 /* ---------- Init ---------- */
 window.addEventListener("scroll", onScroll, { passive: true });
-window.addEventListener("resize", resizeCanvas);
+window.addEventListener("resize", () => {
+  if (revealSection) revealSection.style.height = (slideCount * SEG + 1) * 100 + "vh";
+  activeSlide = -1; // force re-evaluation after layout change
+  resizeCanvas();
+  updateReveal();
+});
 document.getElementById("year").textContent = new Date().getFullYear();
 setupLang();
 resizeCanvas();
 setupReveal();
+setupNav();
 preload();

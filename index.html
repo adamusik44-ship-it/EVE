@@ -24,9 +24,9 @@
   <header class="nav">
     <div class="nav-brand">EVE</div>
     <nav class="nav-links">
-      <a href="#services" data-i18n="nav_services">שירותים</a>
-      <a href="#about" data-i18n="nav_about">אודות</a>
-      <a href="#contact" data-i18n="nav_contact">צרו קשר</a>
+      <a href="#" data-target="services" data-i18n="nav_services">שירותים</a>
+      <a href="#" data-target="about" data-i18n="nav_about">אודות</a>
+      <a href="#" data-target="contact" data-i18n="nav_contact">צרו קשר</a>
     </nav>
     <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
       <button data-lang="he" class="active">HE</button>
@@ -48,70 +48,76 @@
     </div>
   </section>
 
-  <!-- Content below -->
+  <!-- Sequential scroll-reveal: each item pops in over the woman, one by one -->
   <main class="content">
-    <section id="services" class="panel services-panel">
-      <p class="eyebrow" data-i18n="services_eyebrow">01 — השירותים שלנו</p>
-      <h2 data-i18n="services_title">טיפוח מדויק, מכף רגל ועד הגבה.</h2>
-      <div class="services-grid">
-        <article class="service-card">
-          <span class="service-num">01</span>
-          <h3 data-i18n="svc_wax">שעווה</h3>
-          <p data-i18n="svc_wax_d">הסרת שיער עדינה ויסודית לעור חלק לאורך זמן.</p>
-        </article>
-        <article class="service-card">
-          <span class="service-num">02</span>
-          <h3 data-i18n="svc_nails">בנייה / ג׳ל / מניקור / פדיקור</h3>
-          <p data-i18n="svc_nails_d">ציפורניים מושלמות — בנייה, ג׳ל וטיפוח ידיים ורגליים.</p>
-        </article>
-        <article class="service-card">
-          <span class="service-num">03</span>
-          <h3 data-i18n="svc_brows">עיצוב גבות</h3>
-          <p data-i18n="svc_brows_d">עיצוב מותאם אישית שמדגיש את קווי הפנים.</p>
-        </article>
-        <article class="service-card">
-          <span class="service-num">04</span>
-          <h3 data-i18n="svc_lash">הרמת ריסים</h3>
-          <p data-i18n="svc_lash_d">ריסים מורמים ומלאים למבט פתוח וטבעי.</p>
-        </article>
-        <article class="service-card">
-          <span class="service-num">05</span>
-          <h3 data-i18n="svc_micro">מיקרובליידינג</h3>
-          <p data-i18n="svc_micro_d">מילוי גבות בטכניקת שׂיער-שׂיער לתוצאה טבעית.</p>
-        </article>
-        <article class="service-card">
-          <span class="service-num">06</span>
-          <h3 data-i18n="svc_laser">הסרת שיער בלייזר קר</h3>
-          <p data-i18n="svc_laser_d">הסרת שיער יעילה ונעימה בטכנולוגיית לייזר קר.</p>
-        </article>
-      </div>
-    </section>
+    <section class="reveal-scroll" id="reveal">
+      <div class="reveal-stage">
 
-    <section id="about" class="panel alt">
-      <p class="eyebrow" data-i18n="about_eyebrow">02 — אודות</p>
-      <h2 data-i18n="about_title">נוכחות שקטה. נראות חדה.</h2>
-      <p class="lede" data-i18n="about_lede">EVE הוא מרחב טיפוח אישי שבו כל טיפול נעשה בקפידה, בנקיון ובתשומת לב לפרטים — כדי שתצאו מרגישות את הגרסה הטובה ביותר של עצמכן.</p>
-    </section>
+        <div class="slide" data-slide="services">
+          <p class="eyebrow" data-i18n="services_eyebrow">01 — השירותים שלנו</p>
+          <h2 class="slide-title" data-i18n="services_title">טיפוח מדויק, מכף רגל ועד הגבה.</h2>
+        </div>
 
-    <section id="contact" class="panel">
-      <p class="eyebrow" data-i18n="contact_eyebrow">03 — צרו קשר</p>
-      <h2 data-i18n="contact_title">לתאם תור?</h2>
-      <p class="lede" data-i18n="contact_lede">נשמח לארח אתכן. שלחו הודעה ונחזור אליכן בהקדם.</p>
-      <div class="contact-details">
-        <div class="detail">
-          <span class="detail-label" data-i18n="label_address">כתובת</span>
-          <span class="detail-value" data-i18n="value_address">מרכזון י׳, אשדוד</span>
+        <div class="slide">
+          <span class="slide-num">01</span>
+          <h3 class="slide-name" data-i18n="svc_wax">שעווה</h3>
+          <p class="slide-desc" data-i18n="svc_wax_d">הסרת שיער עדינה ויסודית לעור חלק לאורך זמן.</p>
         </div>
-        <div class="detail">
-          <span class="detail-label" data-i18n="label_hours">שעות פעילות</span>
-          <span class="detail-value" data-i18n="value_hours">ראשון–חמישי · 8:00–19:00</span>
+        <div class="slide">
+          <span class="slide-num">02</span>
+          <h3 class="slide-name" data-i18n="svc_nails">בנייה / ג׳ל / מניקור / פדיקור</h3>
+          <p class="slide-desc" data-i18n="svc_nails_d">ציפורניים מושלמות — בנייה, ג׳ל וטיפוח ידיים ורגליים.</p>
         </div>
-        <div class="detail">
-          <span class="detail-label" data-i18n="label_phone">טלפון</span>
-          <a class="detail-value" href="tel:+972522735915" dir="ltr">052-273-5915</a>
+        <div class="slide">
+          <span class="slide-num">03</span>
+          <h3 class="slide-name" data-i18n="svc_brows">עיצוב גבות</h3>
+          <p class="slide-desc" data-i18n="svc_brows_d">עיצוב מותאם אישית שמדגיש את קווי הפנים.</p>
         </div>
+        <div class="slide">
+          <span class="slide-num">04</span>
+          <h3 class="slide-name" data-i18n="svc_lash">הרמת ריסים</h3>
+          <p class="slide-desc" data-i18n="svc_lash_d">ריסים מורמים ומלאים למבט פתוח וטבעי.</p>
+        </div>
+        <div class="slide">
+          <span class="slide-num">05</span>
+          <h3 class="slide-name" data-i18n="svc_micro">מיקרובליידינג</h3>
+          <p class="slide-desc" data-i18n="svc_micro_d">מילוי גבות בטכניקת שׂיער-שׂיער לתוצאה טבעית.</p>
+        </div>
+        <div class="slide">
+          <span class="slide-num">06</span>
+          <h3 class="slide-name" data-i18n="svc_laser">הסרת שיער בלייזר קר</h3>
+          <p class="slide-desc" data-i18n="svc_laser_d">הסרת שיער יעילה ונעימה בטכנולוגיית לייזר קר.</p>
+        </div>
+
+        <div class="slide" data-slide="about">
+          <p class="eyebrow" data-i18n="about_eyebrow">02 — אודות</p>
+          <h2 class="slide-title" data-i18n="about_title">נוכחות שקטה. נראות חדה.</h2>
+          <p class="slide-desc" data-i18n="about_lede">EVE הוא מרחב טיפוח אישי שבו כל טיפול נעשה בקפידה, בנקיון ובתשומת לב לפרטים — כדי שתצאו מרגישות את הגרסה הטובה ביותר של עצמכן.</p>
+        </div>
+
+        <div class="slide" data-slide="contact">
+          <p class="eyebrow" data-i18n="contact_eyebrow">03 — צרו קשר</p>
+          <h2 class="slide-title" data-i18n="contact_title">לתאם תור?</h2>
+          <div class="contact-details">
+            <div class="detail">
+              <span class="detail-label" data-i18n="label_address">כתובת</span>
+              <span class="detail-value" data-i18n="value_address">מרכזון י׳, אשדוד</span>
+            </div>
+            <div class="detail">
+              <span class="detail-label" data-i18n="label_hours">שעות פעילות</span>
+              <span class="detail-value" data-i18n="value_hours">ראשון–חמישי · 8:00–19:00</span>
+            </div>
+            <div class="detail">
+              <span class="detail-label" data-i18n="label_phone">טלפון</span>
+              <a class="detail-value" href="tel:+972522735915" dir="ltr">052-273-5915</a>
+            </div>
+          </div>
+          <a class="cta" id="waCta" href="https://wa.me/972522735915?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%AA%D7%90%D7%9D%20%D7%AA%D7%95%D7%A8%20%D7%91-EVE" target="_blank" rel="noopener" data-i18n="contact_cta">קביעת תור בוואטסאפ</a>
+        </div>
+
+        <!-- progress dots -->
+        <div class="reveal-dots" id="revealDots" aria-hidden="true"></div>
       </div>
-      <a class="cta" id="waCta" href="https://wa.me/972522735915?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%AA%D7%90%D7%9D%20%D7%AA%D7%95%D7%A8%20%D7%91-EVE" target="_blank" rel="noopener" data-i18n="contact_cta">קביעת תור בוואטסאפ</a>
     </section>
 
     <footer class="footer">

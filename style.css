@@ -8,14 +8,13 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   background: var(--bg);
   color: var(--fg);
   font-family: "Heebo", "Inter", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
 /* ---------- Loader ---------- */
@@ -119,6 +118,61 @@ body {
 
 /* ---------- Content (over the fixed woman background) ---------- */
 .content { position: relative; z-index: 10; background: transparent; }
+
+/* ===== Sequential scroll reveal — one slide at a time over the woman ===== */
+.reveal-scroll { position: relative; z-index: 10; }
+.reveal-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+.reveal-stage::before {
+  content: ""; position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,.5) 0%, rgba(0,0,0,.38) 55%, rgba(0,0,0,.6) 100%);
+}
+.slide {
+  position: absolute; inset: 0; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; gap: 18px;
+  padding: 0 clamp(22px, 8vw, 160px);
+  opacity: 0; transform: translateY(48px) scale(.985);
+  transition: opacity .5s cubic-bezier(.22,.61,.36,1), transform .55s cubic-bezier(.22,.61,.36,1);
+  pointer-events: none; will-change: opacity, transform;
+}
+.slide.active { opacity: 1; transform: none; pointer-events: auto; }
+.slide .eyebrow { color: var(--accent); margin: 0; }
+.slide-num {
+  font-family: "Cormorant Garamond", serif; font-size: clamp(16px, 2vw, 24px);
+  color: var(--accent); letter-spacing: .35em;
+}
+.slide-title {
+  font-family: "Cormorant Garamond", serif; font-weight: 500;
+  font-size: clamp(40px, 8vw, 108px); line-height: 1.04; max-width: 18ch;
+  color: #fff; text-shadow: 0 8px 48px rgba(0,0,0,.6);
+}
+.slide-name {
+  font-family: "Cormorant Garamond", serif; font-weight: 500;
+  font-size: clamp(34px, 6.5vw, 84px); line-height: 1.05; max-width: 16ch;
+  color: #fff; text-shadow: 0 8px 48px rgba(0,0,0,.6);
+}
+.slide-desc {
+  font-size: clamp(16px, 2.1vw, 23px); color: rgba(244,241,236,.92);
+  font-weight: 300; line-height: 1.7; max-width: 52ch;
+  text-shadow: 0 2px 22px rgba(0,0,0,.7);
+}
+.slide .contact-details { justify-content: center; margin: 30px 0 36px; }
+.slide .detail-value { color: #fff; text-shadow: 0 2px 16px rgba(0,0,0,.7); }
+.slide .cta { align-self: center; color: #fff; border-color: var(--accent); backdrop-filter: blur(2px); }
+.slide .cta:hover { background: var(--accent); color: #0a0a0a; }
+
+/* progress dots */
+.reveal-dots {
+  position: absolute; z-index: 3; top: 50%; transform: translateY(-50%);
+  inset-inline-start: clamp(16px, 3vw, 40px);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.reveal-dots button {
+  width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%;
+  background: rgba(255,255,255,.3); cursor: pointer; transition: all .3s;
+}
+.reveal-dots button.on { background: var(--accent); transform: scale(1.4); }
+@media (max-width: 640px) { .reveal-dots { display: none; } }
 .panel {
   min-height: 90vh; display: flex; flex-direction: column; justify-content: center;
   padding: clamp(60px, 12vh, 160px) clamp(22px, 8vw, 140px);
